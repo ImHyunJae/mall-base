@@ -5,9 +5,9 @@ const port = 5000
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
-const { auth } = require('./middleware/auth')
-const { User } = require('./models/User')
-const config = require('./config/key')
+const { auth } = require('./server/middleware/auth')
+const { User } = require('./server/models/User')
+const config = require('./server/config/key')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -24,6 +24,10 @@ mongoose
 
 app.get('/', (req, res) => {
   res.send('Hello World! node mon is working')
+})
+
+app.get('/api/hello', (req, res) => {
+  res.send('hello')
 })
 
 app.post('/api/users/register', (req, res) => {
@@ -81,7 +85,7 @@ app.get('/api/users/auth', auth, (req, res) => {
     name: req.user.role,
     lastname: req.user.lastname,
     role: req.user.role,
-    role: req.user.iamge,
+    image: req.user.iamge,
   })
 })
 
